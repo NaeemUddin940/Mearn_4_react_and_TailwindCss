@@ -1,27 +1,28 @@
 function App() {
-let string = "";
-const buttons = document.querySelectorAll("button");
-const input = document.querySelector("input");
-buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        let value = button.innerText;
-        if (value === "=") {
-            try {
-                string = Function(`return ${string}`)(); // Safer than eval()
-            } catch {
-                string = "Error"; // Handle invalid input
-            }
-        } else if (value === "AC") {
-            string = ""; // Clear input
-        } else if(value == "DEL"){
-            string = string.substring(0, string.length-1)
-        }else {
-            string += value; // Add clicked button's value
-        }
-        input.value = string; // Update input field
-    });
-});
-
+  let string = "";
+  const buttons = document.querySelectorAll("button");
+  const input = document.querySelector("input");
+  buttons.forEach(button => {
+      button.addEventListener("click", () => {
+          let value = button.innerText;
+  
+          if (value === "=") {
+              try {
+                  string = Function(`return ${string}`)(); // Safer than eval()
+              } catch {
+                  string = "Error"; // Handle invalid input 
+              }
+          } else if (value === "AC") {
+              string = ""; // Clear input
+          } else if(value == "DEL"){
+              string = string.substring(0, string.length-1)
+          } else {
+              string += value; // Add clicked button's value
+          }
+          input.value = string; // Update input field
+      });
+  });
+  
   return (
     <div className="font-[poppines] bg-linear-45 from-[#0a0a0a] to-[#3a4452] h-screen flex justify-center items-center flex-col">
       <calculator className="text-center p-6 border-1 border-white shadow-[10px_15px_25px_rgba(113,115,119,0.25)] rounded-2xl bg-transparent">
@@ -33,7 +34,7 @@ buttons.forEach(button => {
           <button>AC</button>
           <button>DEL</button>
           <button>%</button>
-          <button className="text-green-400">/</button>
+          <button className="text-blue">/</button>
           <div>
             
             <button>7</button>
