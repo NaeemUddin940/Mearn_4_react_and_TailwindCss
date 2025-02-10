@@ -1,9 +1,32 @@
 function App() {
+let string = "";
+const buttons = document.querySelectorAll("button");
+const input = document.querySelector("input");
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        let value = button.innerText;
+        if (value === "=") {
+            try {
+                string = Function(`return ${string}`)(); // Safer than eval()
+            } catch {
+                string = "Error"; // Handle invalid input
+            }
+        } else if (value === "AC") {
+            string = ""; // Clear input
+        } else if(value == "DEL"){
+            string = string.substring(0, string.length-1)
+        }else {
+            string += value; // Add clicked button's value
+        }
+        input.value = string; // Update input field
+    });
+});
+
   return (
     <div className="font-[poppines] bg-linear-45 from-[#0a0a0a] to-[#3a4452] h-screen flex justify-center items-center flex-col">
       <calculator className="text-center p-6 border-1 border-white shadow-[10px_15px_25px_rgba(113,115,119,0.25)] rounded-2xl bg-transparent">
         <input
-          className="text-[30px]  border-none placeholder:text-white text-right w-full p-5 rounded-xl border-1" type="text" placeholder="0"
+          className="text-[30px] placeholder:text-white border-none text-right w-full p-5 rounded-xl border-1" type="text" placeholder="0"
         />
 
         <div className="mt-2">
